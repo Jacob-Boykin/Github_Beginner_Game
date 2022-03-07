@@ -4,11 +4,14 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D body;
     [SerializeField] private float speed;
-    
-    // checks every time you launch/start game//
+    private Animator anim;
+
+   
     private void Awake()
     {
+        //Grab references for rigidbody and animator from object//
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
     // Checks every frame
     private void Update() 
@@ -27,5 +30,8 @@ public class PlayerMovement : MonoBehaviour
         //jump code//
         if(Input.GetKey(KeyCode.Space))
             body.velocity = new Vector2(body.velocity.x, speed);
+
+        //Set animator parameters
+        anim.SetBool("run", horizontalInput != 0);
     }
 }

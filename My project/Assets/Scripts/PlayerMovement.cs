@@ -84,11 +84,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-    }
-
     private bool isGrounded()
     {
         //used to tell when object is touching the ground instead of using a booleon. 
@@ -103,5 +98,10 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
     
+    }
+
+    public bool canAttack()
+    {
+        return horizontalInput == 0 && isGrounded() && !onWall();
     }
 }
